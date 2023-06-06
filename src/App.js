@@ -199,6 +199,7 @@ export default class App extends Component {
             <div>
               <label>Процентная ставка</label>
               <IMaskInput
+              mask="09.99"
               thousandsSeparator='.'
               unmask={false}
               onAccept={
