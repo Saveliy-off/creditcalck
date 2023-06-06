@@ -162,9 +162,9 @@ export default class App extends Component {
                       <tr>
                         <th>{el[0]}</th>
                         <th>{Intl.NumberFormat("ru", {style: "currency", currency: "RUB"}).format(el[1])}</th>
-                        <th>{Intl.NumberFormat("ru", {style: "currency", currency: "RUB"}).format(el[2])}</th>
+                        <th>{Intl.NumberFormat("ru", {style: "currency", currency: "RUB"}).format(el[2] + Number(this.state.sms))}</th>
                         <th>{Intl.NumberFormat("ru", {style: "currency", currency: "RUB"}).format(el[3])}</th>
-                        { (this.state.sms > 0) ? (<th>{Intl.NumberFormat("ru", {style: "currency", currency: "RUB"}).format(Number(el[5]) + Number(this.state.sms))}</th>) : (<div className='none'></div>) }
+                        { (this.state.sms > 0) ? (<th>{Intl.NumberFormat("ru", {style: "currency", currency: "RUB"}).format(Number(el[5]))}</th>) : (<div className='none'></div>) }
                         <th>{Intl.NumberFormat("ru", {style: "currency", currency: "RUB"}).format(el[4])}</th>
                       </tr>
                       ))}
