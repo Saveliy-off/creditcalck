@@ -29,9 +29,7 @@ body {
   font-family: 'Poppins', sans-serif;
   /* font-family: system-ui, sans-serif; */
   /* font-family: 'Courier New', Courier, monospace; */
-  /* color: hsl(230, 7%, 23%); */
-  color: #eaf2e3;
-  background: #f25757;
+  color: hsl(230, 7%, 23%);
   font-size: 16px;
   line-height: 1.4;
 }
@@ -102,7 +100,6 @@ img, video, svg {
   padding: 15px;
   box-shadow: 12px 5px 100px rgba(0, 0, 0, 0.18);
   border-radius: 20px;
-  background: #eaf2e3;
 }
 
 .btn {
@@ -144,7 +141,6 @@ nav {
   width: fit-content;
   margin: calc(5%) auto;
   box-shadow: 2px 4px 35px rgba(117, 121, 255, 0.18);
-  background: #eaf2e3;
   border-radius: 28px;
   padding: 24px 25px;
 }
