@@ -288,7 +288,9 @@ export default class App extends Component {
               thousandsSeparator=' '
               unmask={true}
               onAccept={
-                (value, mask) => this.setState({precent: value})
+                (value, mask) => {this.setState({precent: Number(value)})
+                console.log(typeof(Number(value)))
+                console.log(Number(value))}
               }
               placeholder=''
               className='input'/>
@@ -341,13 +343,10 @@ export default class App extends Component {
               onChange={event => this.handleInputChange(index, event)}
             />
             <label>Сумма чдп</label>
-            <IMaskInput
-              mask={Number}
-              max='999999999'
-              thousandsSeparator=" "
-              unmask={true}
-              onAccept={event => this.handleCdpChange(index, event)}
-              className='input'/>
+            <input className='input'
+              
+              onChange={event => this.handleCdpChange(index, event)}
+            />
             </div>
             <button className='btn' onClick={(e) => {this.removeInput(index); e.preventDefault()}}>Удалить</button>
           </div>
