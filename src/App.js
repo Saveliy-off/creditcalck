@@ -338,18 +338,19 @@ export default class App extends Component {
           {inputs.map((input, index) => (
           <div className='input_group' key={index}>
             <div>
+              <label>Дата</label>
             <input className='input'
               value={input}
               type='date'
               onChange={event => this.handleInputChange(index, event)}
             />
+            <label>Сумма чдп</label>
             <IMaskInput
               mask={Number}
               max='999999999'
               thousandsSeparator=" "
               unmask={true}
               onAccept={event => this.handleCdpChange(index, event)}
-              placeholder="250 000"
               className='input'/>
             </div>
             <button className='btn' onClick={(e) => {this.removeInput(index); e.preventDefault()}}>Удалить</button>
