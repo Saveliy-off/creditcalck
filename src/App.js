@@ -279,7 +279,6 @@ export default class App extends Component {
               thousandsSeparator=" "
               unmask={true}
               onAccept={(value, mask) => this.setState({summ: value})}
-              placeholder="250 000"
               className='input'/>
             </div>
             <div>
@@ -307,7 +306,6 @@ export default class App extends Component {
               onAccept={
                 (value, mask) => this.setState({months: value})
               }
-              placeholder='18'
               className='input'/>
             </div>
             <div>
@@ -324,7 +322,6 @@ export default class App extends Component {
                 thousandsSeparator=" "
                 unmask={true}
                 onAccept={(value, mask) => this.setState({sms: value})}
-                placeholder="199"
                 className='input'/>
               </div>
               <section className={this.state.pdp}>
