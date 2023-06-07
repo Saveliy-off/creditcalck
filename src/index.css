@@ -201,10 +201,16 @@ nav {
 table {
   width: 100%;
 }
+table > thead {
+  border-radius: 100px;
+  background: #694DF9;
+}
 table > thead > tr > th {
   font-weight: 600;
-  background: #694DF9;
   color: #ffffff;
+}
+table > tbody > tr:hover {
+  background: #eaf2e3;
 }
 th {
   padding: 18px;
