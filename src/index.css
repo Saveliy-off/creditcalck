@@ -29,7 +29,9 @@ body {
   font-family: 'Poppins', sans-serif;
   /* font-family: system-ui, sans-serif; */
   /* font-family: 'Courier New', Courier, monospace; */
-  color: hsl(230, 7%, 23%);
+  /* color: hsl(230, 7%, 23%); */
+  color: #eaf2e3;
+  background: #f25757;
   font-size: 16px;
   line-height: 1.4;
 }
@@ -100,6 +102,7 @@ img, video, svg {
   padding: 15px;
   box-shadow: 12px 5px 100px rgba(0, 0, 0, 0.18);
   border-radius: 20px;
+  background: #eaf2e3;
 }
 
 .btn {
