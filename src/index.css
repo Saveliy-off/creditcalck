@@ -123,9 +123,6 @@ img, video, svg {
   color: #C2C2C2;
   cursor: default;
 }
-.none {
-  display: none;
-}
 nav {
   display: flex;
   align-items: center;
@@ -235,4 +232,8 @@ th {
   .btn_group {
     flex-direction: column;
   }
+}
+.none {
+  display: none;
+  opacity: 0;
 }

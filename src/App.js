@@ -12,6 +12,8 @@ export default class App extends Component {
       months: 0,
       date: 0,
       sms: 0,
+      pdp: 'none',
+      pdpdate: '',
     }
   }
   decimalAdjust(type, value, exp) {
@@ -63,6 +65,13 @@ export default class App extends Component {
     const sms = Number(this.state.sms);
     const precent = Number(this.state.precent) * 0.010000;
     const months = this.state.months;
+    const pdpdate = new Date(this.state.pdpdate);
+    let pdpmonth = 0
+    let pdpyear = 0
+    if (this.state.pdpdate) {
+      pdpmonth = pdpdate.getMonth()
+      pdpyear = pdpdate.getFullYear()
+    }
     // const arras = [new Date("2023-06-17").getMonth() + 1, new Date("2023-06-17").getFullYear(), 90000]
     const overpayment = this.overpayment();
     let ej = overpayment * summ
@@ -73,7 +82,13 @@ export default class App extends Component {
     let ret = [[date.toLocaleDateString(), 0, 0, 0, summ, 0]]
     for (let index = 0; index < months; index++) {
       let pr = summ2 * precent * this.howMuchDays(year, mes) / this.days_of_a_year(year)
-      let sj = (ej - pr)
+      let sj = 0
+      if (pdpmonth === mes && pdpyear === year) {
+        sj = (summ2 - pr)
+        index = months - 1
+      }else {
+        sj = (ej - pr)
+      }
       summ2 -= sj
       if (mes >= 12) {
         mes = 1
@@ -228,14 +243,6 @@ export default class App extends Component {
               <input type='date' onChange={e=>this.setState({date: e.target.value})} className='input'/>
             </div>
           </div>
-          {/* <div className='btn_group'>
-            <div>
-              <button disabled className='btn'>ЧПД</button>
-            </div>
-            <div>
-              <button disabled className='btn'>ПДП</button>
-            </div>
-          </div> */}
           <div className='input_group'>
               <div>
                 <label>смс информирование</label>
@@ -248,11 +255,15 @@ export default class App extends Component {
                 placeholder="199"
                 className='input'/>
               </div>
+              <div className={this.state.pdp}>
+                <label>ПДП</label>
+                <input type='date' onChange={e=>this.setState({pdpdate: e.target.value})} className='input'/>
+              </div>
           </div>
           <div className='btn_group'>
           <nav>
             <button disabled className='btn'>ЧПД</button>
-            <button disabled className='btn'>ПДП</button>
+            <button onClick={e=>{this.setState({pdp: ''}); e.preventDefault()}} className='btn'>ПДП</button>
           </nav>
               { (this.state.summ > 0 && this.state.months > 0 && this.state.precent > 0 && this.state.date !== 0) ? (<button onClick={e=>{this.setState({grafic: 'block', main: 'none'}); e.preventDefault()}} className='btn primary'>Расчитать</button>) : (<button disabled className='btn'>Расчитать</button>) }
           </div>
