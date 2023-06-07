@@ -125,14 +125,10 @@ export default class App extends Component {
 
     let idl = 0
 
-    let ostmonth = months - 2
-    let over = (precent/12*((1+precent/12))**ostmonth)/(((1+precent/12)**ostmonth)-1)
-
 
 
 
     for (let index = 0; index < months; index++) {
-      ostmonth--
       let pr = summ2 * precent * this.howMuchDays(year, mes) / this.days_of_a_year(year)
       let sj = 0
       if (pdpmonth === mes && pdpyear === year) {
@@ -140,6 +136,15 @@ export default class App extends Component {
         index = months - 1
         summ2 -= sj
       } else if (cdpmonth[idl] === mes && cdpyear[idl] === year) {
+        var start = new Date(date);
+        var end = new Date(cdpyear[idl] + '-' + cdpmonth[idl] + '-' + date.getDate());
+
+        var yearDiff = end.getFullYear() - start.getFullYear();
+        var monthDiff = end.getMonth() - start.getMonth();
+
+        var totalMonths = (yearDiff * 12) + monthDiff;
+        let ostmonth = Number(months) - Number(totalMonths) - 1
+        let over = (precent/12*((1+precent/12))**ostmonth)/(((1+precent/12)**ostmonth)-1)
         sj = (ej - pr + Number(cdpsumm[idl]))
         summ2 -= sj
         ej = over * summ2
@@ -280,13 +285,14 @@ export default class App extends Component {
             <div>
               <label>Процентная ставка</label>
               <IMaskInput
-              mask="00.00"
-              thousandsSeparator='.'
-              unmask={false}
+              mask={Number}
+              max='99'
+              thousandsSeparator=' '
+              unmask={true}
               onAccept={
                 (value, mask) => this.setState({precent: value})
               }
-              placeholder='18.00'
+              placeholder=''
               className='input'/>
             </div>
           </div>
