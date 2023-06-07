@@ -343,10 +343,14 @@ export default class App extends Component {
               type='date'
               onChange={event => this.handleInputChange(index, event)}
             />
-            <input className='input'
-              
-              onChange={event => this.handleCdpChange(index, event)}
-            />
+            <IMaskInput
+              mask={Number}
+              max='999999999'
+              thousandsSeparator=" "
+              unmask={true}
+              onAccept={event => this.handleCdpChange(index, event)}
+              placeholder="250 000"
+              className='input'/>
             </div>
             <button className='btn' onClick={(e) => {this.removeInput(index); e.preventDefault()}}>Удалить</button>
           </div>
