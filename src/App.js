@@ -111,7 +111,6 @@ export default class App extends Component {
         cdpmonth.push(dates.getMonth())
         cdpyear.push(dates.getFullYear())
         cdpsumm.push(this.state.cdp[index])
-        console.log(cdpmonth, cdpyear, cdpsumm)
       }
     }
     // const arras = [new Date("2023-06-17").getMonth() + 1, new Date("2023-06-17").getFullYear(), 90000]
