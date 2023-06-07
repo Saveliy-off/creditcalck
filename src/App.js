@@ -263,7 +263,7 @@ export default class App extends Component {
           <div className='btn_group'>
           <nav>
             <button disabled className='btn'>ЧПД</button>
-            { (this.state.pdp === 'none') ? <button onClick={e=>{this.setState({pdp: 'pdp'}); e.preventDefault()}} className='btn'>ПДП</button> : <button onClick={e=>{this.setState({pdp: 'none'}); e.preventDefault()}} className='btn'>ПДП</button> }
+            { (this.state.pdp === 'none') ? <button onClick={e=>{this.setState({pdp: 'pdp'}); e.preventDefault()}} className='btn'>+ПДП</button> : <button onClick={e=>{this.setState({pdp: 'none'}); e.preventDefault()}} className='btn'>-ПДП</button> }
           </nav>
               { (this.state.summ > 0 && this.state.months > 0 && this.state.precent > 0 && this.state.date !== 0) ? (<button onClick={e=>{this.setState({grafic: 'block', main: 'none'}); e.preventDefault()}} className='btn primary'>Расчитать</button>) : (<button disabled className='btn'>Расчитать</button>) }
           </div>
