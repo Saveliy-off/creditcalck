@@ -237,3 +237,7 @@ th {
   display: none;
   opacity: 0;
 }
+.pdp {
+  display: flex;
+  flex-direction: column;
+}

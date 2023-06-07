@@ -255,15 +255,15 @@ export default class App extends Component {
                 placeholder="199"
                 className='input'/>
               </div>
-              <div className={this.state.pdp}>
+              <section className={this.state.pdp}>
                 <label>ПДП</label>
                 <input type='date' onChange={e=>this.setState({pdpdate: e.target.value})} className='input'/>
-              </div>
+              </section>
           </div>
           <div className='btn_group'>
           <nav>
             <button disabled className='btn'>ЧПД</button>
-            <button onClick={e=>{this.setState({pdp: ''}); e.preventDefault()}} className='btn'>ПДП</button>
+            <button onClick={e=>{this.setState({pdp: 'pdp'}); e.preventDefault()}} className='btn'>ПДП</button>
           </nav>
               { (this.state.summ > 0 && this.state.months > 0 && this.state.precent > 0 && this.state.date !== 0) ? (<button onClick={e=>{this.setState({grafic: 'block', main: 'none'}); e.preventDefault()}} className='btn primary'>Расчитать</button>) : (<button disabled className='btn'>Расчитать</button>) }
           </div>
