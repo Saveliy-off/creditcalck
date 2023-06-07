@@ -14,8 +14,40 @@ export default class App extends Component {
       sms: 0,
       pdp: 'none',
       pdpdate: '',
+      inputs: [''],
+      cdp: ['']
     }
   }
+
+  handleInputChange(index, event) {
+    const { value } = event.target;
+    const inputs = [...this.state.inputs];
+    inputs[index] = value;
+    this.setState({ inputs });
+  }
+  handleCdpChange(index, event) {
+    const { value } = event.target;
+    const cdp = [...this.state.cdp];
+    cdp[index] = value;
+    this.setState({ cdp });
+  }
+  addInput() {
+    this.setState(prevState => ({ inputs: [...prevState.inputs, ''] }));
+    this.setState(prevState => ({ cdp: [...prevState.cdp, ''] }));
+  }
+  removeInput(index) {
+    this.setState(prevState => {
+      const inputs = [...prevState.inputs];
+      const cdp = [...prevState.cdp];
+      inputs.splice(index, 1);
+      cdp.splice(index, 1);
+      return { inputs, cdp };
+    });
+  }
+
+
+
+
   decimalAdjust(type, value, exp) {
     if (typeof exp === 'undefined' || +exp === 0) {
       return Math[type](value);
@@ -26,10 +58,8 @@ export default class App extends Component {
     if (isNaN(value) || !(typeof exp === 'number' && exp % 1 === 0)) {
       return NaN;
     }
-    // Сдвиг разрядов
     value = value.toString().split('e');
     value = Math[type](+(value[0] + 'e' + (value[1] ? (+value[1] - exp) : -exp)));
-    // Обратный сдвиг
     value = value.toString().split('e');
     return +(value[0] + 'e' + (value[1] ? (+value[1] + exp) : exp));
   }
@@ -72,24 +102,59 @@ export default class App extends Component {
       pdpmonth = pdpdate.getMonth()
       pdpyear = pdpdate.getFullYear()
     }
+    let cdpmonth = []
+    let cdpyear = []
+    let cdpsumm = []
+    if (this.state.inputs && this.state.cdp) {
+      for (let index = 0; index < this.state.inputs.length; index++) {
+        const dates = new Date(this.state.inputs[index])
+        cdpmonth.push(dates.getMonth())
+        cdpyear.push(dates.getFullYear())
+        cdpsumm.push(this.state.cdp[index])
+        console.log(cdpmonth, cdpyear, cdpsumm)
+      }
+    }
     // const arras = [new Date("2023-06-17").getMonth() + 1, new Date("2023-06-17").getFullYear(), 90000]
     const overpayment = this.overpayment();
-    let ej = overpayment * summ
     const date =  new Date(this.state.date);
     let summ2 = summ
-    let mes = date.getMonth() + 1
+    let ej = overpayment * summ2
+    let mes = date.getMonth()  + 1
     let year = date.getFullYear()
     let ret = [[date.toLocaleDateString(), 0, 0, 0, summ, 0]]
+
+    let idl = 0
+
+    let ostmonth = months - 2
+    let over = (precent/12*((1+precent/12))**ostmonth)/(((1+precent/12)**ostmonth)-1)
+
+
+
+
     for (let index = 0; index < months; index++) {
+      ostmonth--
       let pr = summ2 * precent * this.howMuchDays(year, mes) / this.days_of_a_year(year)
       let sj = 0
       if (pdpmonth === mes && pdpyear === year) {
         sj = (summ2 - pr)
         index = months - 1
-      }else {
+        summ2 -= sj
+      } else if (cdpmonth[idl] === mes && cdpyear[idl] === year) {
+        sj = (ej - pr + Number(cdpsumm[idl]))
+        summ2 -= sj
+        ej = over * summ2
+        idl++
+      } else {
         sj = (ej - pr)
+        summ2 -= sj
       }
-      summ2 -= sj
+
+      // if (summ2 < (sj * 2)) {
+      //   sj+= summ2
+      //   index = months
+      //   summ2 -= sj
+      // }
+
       if (mes >= 12) {
         mes = 1
         year++
@@ -121,6 +186,7 @@ export default class App extends Component {
   }
 
   render() {
+    const { inputs } = this.state;
     return (
       <section>
         <section className={this.state.grafic}>
@@ -260,9 +326,28 @@ export default class App extends Component {
                 <input type='date' onChange={e=>this.setState({pdpdate: e.target.value})} className='input'/>
               </section>
           </div>
+          <div className='input_group'>
+            <p>Частичное погашение</p>
+          </div>
+          {inputs.map((input, index) => (
+          <div className='input_group' key={index}>
+            <div>
+            <input className='input'
+              value={input}
+              type='date'
+              onChange={event => this.handleInputChange(index, event)}
+            />
+            <input className='input'
+              
+              onChange={event => this.handleCdpChange(index, event)}
+            />
+            </div>
+            <button className='btn' onClick={(e) => {this.removeInput(index); e.preventDefault()}}>Удалить</button>
+          </div>
+        ))}
           <div className='btn_group'>
           <nav>
-            <button disabled className='btn'>ЧПД</button>
+            <button onClick={(e) => {this.addInput(); e.preventDefault()}} className='btn'>ЧПД</button>
             { (this.state.pdp === 'none') ? <button onClick={e=>{this.setState({pdp: 'pdp'}); e.preventDefault()}} className='btn'>+ПДП</button> : <button onClick={e=>{this.setState({pdp: 'none', pdpdate: 0}); e.preventDefault()}} className='btn'>-ПДП</button> }
           </nav>
               { (this.state.summ > 0 && this.state.months > 0 && this.state.precent > 0 && this.state.date !== 0) ? (<button onClick={e=>{this.setState({grafic: 'block', main: 'none'}); e.preventDefault()}} className='btn primary'>Расчитать</button>) : (<button disabled className='btn'>Расчитать</button>) }
