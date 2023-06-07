@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/creditcalck/static/css/main.bb2fec1b.css",
+    "main.css": "/creditcalck/static/css/main.7ce57c29.css",
     "main.js": "/creditcalck/static/js/main.0438f4c6.js",
     "index.html": "/creditcalck/index.html",
-    "main.bb2fec1b.css.map": "/creditcalck/static/css/main.bb2fec1b.css.map",
+    "main.7ce57c29.css.map": "/creditcalck/static/css/main.7ce57c29.css.map",
     "main.0438f4c6.js.map": "/creditcalck/static/js/main.0438f4c6.js.map"
   },
   "entrypoints": [
-    "static/css/main.bb2fec1b.css",
+    "static/css/main.7ce57c29.css",
     "static/js/main.0438f4c6.js"
   ]
 }
