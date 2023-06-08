@@ -142,6 +142,7 @@ nav {
   padding: 24px 25px;
 }
 .input {
+  height: 39px;
   width: 256px;
   border: 1px solid #C2C2C2;
   border-radius: 4px;

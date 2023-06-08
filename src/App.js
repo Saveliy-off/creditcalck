@@ -191,6 +191,8 @@ export default class App extends Component {
 
   render() {
     const { inputs } = this.state;
+
+    
     return (
       <section>
         <section className={this.state.grafic}>
@@ -331,7 +333,7 @@ export default class App extends Component {
               </section>
           </div>
           <div className='input_group'>
-            <p>Частичное погашение</p>
+            <h1>Частичное погашение</h1>
           </div>
           {inputs.map((input, index) => (
           <div className='input_group' key={index}>
