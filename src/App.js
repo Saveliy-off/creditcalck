@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { IMaskInput } from 'react-imask';
+import { DatePicker, Button } from 'antd';
+
 
 export default class App extends Component {
   constructor (props) {
@@ -19,8 +21,8 @@ export default class App extends Component {
     }
   }
 
-  handleInputChange(index, event) {
-    const { value } = event.target;
+  handleInputChange(index, dateString) {
+    const value = dateString;
     const inputs = [...this.state.inputs];
     inputs[index] = value;
     this.setState({ inputs });
@@ -188,18 +190,18 @@ export default class App extends Component {
       return [(<th>Смс</th>)]
     }
   }
-
   render() {
     const { inputs } = this.state;
-
-    
+    const onChange = (date, dateString) => {
+      this.setState({date: dateString})
+    };
     return (
       <section>
         <section className={this.state.grafic}>
             <div className='table'>
                 <div className='table_title'>
                   <h1>Расчет по кредиту</h1>
-                  <button className='btn' onClick={e=>this.setState({grafic: 'none', main: 'box'})}>Закрыть</button>
+                  <Button className='btn' onClick={e=>this.setState({grafic: 'none', main: 'box'})}>Закрыть</Button>
                 </div>
                 <div className='wraped'>
                   <div className='block_rs'>
@@ -231,7 +233,7 @@ export default class App extends Component {
                     <h1>{Intl.NumberFormat("ru-RU", {style: "currency", currency: "RUB"}).format(this.state.sms)}</h1>
                   </div>
                 </div>
-                <button onClick={e=>window.print()} className='btn'>Печатать</button>
+                <Button onClick={e=>window.print()} className='btn'>Печатать</Button>
                 <div className='overwlo'>
                   <table className='tabel'>
                     <thead>
@@ -313,7 +315,8 @@ export default class App extends Component {
             </div>
             <div>
               <label>Дата получения</label>
-              <input type='date' onChange={e=>this.setState({date: e.target.value})} className='input'/>
+              <DatePicker onChange={onChange} />
+              {/* <input type='date' onChange={event=>this.setState({date: event.target.value})} className='input'/> */}
             </div>
           </div>
           <div className='input_group'>
@@ -339,26 +342,28 @@ export default class App extends Component {
           <div className='input_group' key={index}>
             <div>
               <label>Дата</label>
-            <input className='input'
+              <DatePicker onChange={(date, dateString) => this.handleInputChange(index, dateString)} />
+              {/* <DatePicker onChange={event => this.handleInputChange(index, event)} /> */}
+            {/* <input className='input'
               value={input}
               type='date'
               onChange={event => this.handleInputChange(index, event)}
-            />
+            /> */}
             <label>Сумма чдп</label>
             <input className='input'
               
               onChange={event => this.handleCdpChange(index, event)}
             />
             </div>
-            <button className='btn' onClick={(e) => {this.removeInput(index); e.preventDefault()}}>Удалить</button>
+            <Button className='btn' onClick={(e) => {this.removeInput(index); e.preventDefault()}}>Удалить</Button>
           </div>
         ))}
           <div className='btn_group'>
           <nav>
-            <button onClick={(e) => {this.addInput(); e.preventDefault()}} className='btn'>ЧПД</button>
-            { (this.state.pdp === 'none') ? <button onClick={e=>{this.setState({pdp: 'pdp'}); e.preventDefault()}} className='btn'>+ПДП</button> : <button onClick={e=>{this.setState({pdp: 'none', pdpdate: 0}); e.preventDefault()}} className='btn'>-ПДП</button> }
+            <Button onClick={(e) => {this.addInput(); e.preventDefault()}} className='btn'>ЧПД</Button>
+            { (this.state.pdp === 'none') ? <Button onClick={e=>{this.setState({pdp: 'pdp'}); e.preventDefault()}} className='btn'>+ПДП</Button> : <Button onClick={e=>{this.setState({pdp: 'none', pdpdate: 0}); e.preventDefault()}} className='btn'>-ПДП</Button> }
           </nav>
-              { (this.state.summ > 0 && this.state.months > 0 && this.state.precent > 0 && this.state.date !== 0) ? (<button onClick={e=>{this.setState({grafic: 'block', main: 'none'}); e.preventDefault()}} className='btn primary'>Расчитать</button>) : (<button disabled className='btn'>Расчитать</button>) }
+              { (this.state.summ > 0 && this.state.months > 0 && this.state.precent > 0 && this.state.date !== 0) ? (<Button type='primary' onClick={e=>{this.setState({grafic: 'block', main: 'none'}); e.preventDefault()}}>Расчитать</Button>) : (<Button disabled>Расчитать</Button>) }
           </div>
         </form>
       </section>
