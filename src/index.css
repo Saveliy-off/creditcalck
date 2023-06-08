@@ -249,3 +249,7 @@ nav {
   display: flex;
   flex-direction: column;
 }
+.w100 {
+  width: 256px;
+  height: 39px;
+}

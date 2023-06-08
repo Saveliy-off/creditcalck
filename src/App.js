@@ -315,7 +315,7 @@ export default class App extends Component {
             </div>
             <div>
               <label>Дата получения</label>
-              <DatePicker onChange={onChange} />
+              <DatePicker onChange={onChange} className='w100' />
               {/* <input type='date' onChange={event=>this.setState({date: event.target.value})} className='input'/> */}
             </div>
           </div>
@@ -342,7 +342,7 @@ export default class App extends Component {
           <div className='input_group' key={index}>
             <div>
               <label>Дата</label>
-              <DatePicker onChange={(date, dateString) => this.handleInputChange(index, dateString)} />
+              <DatePicker className='w100' onChange={(date, dateString) => this.handleInputChange(index, dateString)} />
               {/* <DatePicker onChange={event => this.handleInputChange(index, event)} /> */}
             {/* <input className='input'
               value={input}
