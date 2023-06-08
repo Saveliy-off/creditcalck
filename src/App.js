@@ -235,7 +235,7 @@ export default class App extends Component {
                 </div>
                 <Button onClick={e=>window.print()} className='btn'>Печатать</Button>
                 <div className='overwlo'>
-                  <table className='tabel'>
+                  <table className='tabel tab'>
                     <thead>
                       <tr>
                         <th>Дата</th>

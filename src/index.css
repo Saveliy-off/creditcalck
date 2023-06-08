@@ -199,21 +199,21 @@ nav {
 .overwlo {
   overflow-x: scroll;
 }
-table {
+.tab {
   width: 100%;
 }
-table > thead {
+.tab > thead {
   border-radius: 100px;
   background: #694DF9;
 }
-table > thead > tr > th {
+.tab > thead > tr > th {
   font-weight: 600;
   color: #ffffff;
 }
-table > tbody > tr:hover {
+.tab > tbody > tr:hover {
   background: #eaf2e3;
 }
-th {
+.tab > tbody > tr > th, .tab > tbody > tr > th  {
   padding: 18px;
   border-top: 1px solid #EDEEFF;
   border-bottom: 1px solid #EDEEFF;
