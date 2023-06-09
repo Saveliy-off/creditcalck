@@ -40,10 +40,15 @@ export default class App extends Component {
   removeInput(index) {
     this.setState(prevState => {
       const inputs = [...prevState.inputs];
-      const cdp = [...prevState.cdp];
       inputs.splice(index, 1);
+      return { inputs };
+    });
+  }
+  removeCdp(index) {
+    this.setState(prevState => {
+      const cdp = [...prevState.cdp];
       cdp.splice(index, 1);
-      return { inputs, cdp };
+      return { cdp };
     });
   }
 
@@ -355,7 +360,7 @@ export default class App extends Component {
               onChange={event => this.handleCdpChange(index, event)}
             />
             </div>
-            <Button className='btn' onClick={(e) => {this.removeInput(index); e.preventDefault()}}>Удалить</Button>
+            <Button className='btn' onClick={(e) => {this.removeInput(index);this.removeCdp(index); e.preventDefault()}}>Удалить</Button>
           </div>
         ))}
           <div className='btn_group'>
