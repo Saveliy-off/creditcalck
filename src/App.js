@@ -366,6 +366,8 @@ export default class App extends Component {
               { (this.state.summ > 0 && this.state.months > 0 && this.state.precent > 0 && this.state.date !== 0) ? (<Button type='primary' onClick={e=>{this.setState({grafic: 'block', main: 'none'}); e.preventDefault()}}>Расчитать</Button>) : (<Button disabled>Расчитать</Button>) }
           </div>
         </form>
+        <p>{this.state.inputs}</p>
+        <p>{this.state.cdp}</p>
       </section>
     )
   }
