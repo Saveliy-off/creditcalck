@@ -315,7 +315,7 @@ export default class App extends Component {
             </div>
             <div>
               <label>Дата получения</label>
-              <DatePicker onChange={onChange} className='w100' />
+              <DatePicker format="YYYY-MM-DD" onChange={onChange} className='w100' />
               {/* <input type='date' onChange={event=>this.setState({date: event.target.value})} className='input'/> */}
             </div>
           </div>
@@ -342,7 +342,7 @@ export default class App extends Component {
           <div className='input_group' key={index}>
             <div>
               <label>Дата</label>
-              <DatePicker className='w100' onChange={(date, dateString) => this.handleInputChange(index, dateString)} />
+              <DatePicker format="YYYY-MM-DD" className='w100' onChange={(date, dateString) => this.handleInputChange(index, dateString)} />
               {/* <DatePicker onChange={event => this.handleInputChange(index, event)} /> */}
             {/* <input className='input'
               value={input}
@@ -366,8 +366,6 @@ export default class App extends Component {
               { (this.state.summ > 0 && this.state.months > 0 && this.state.precent > 0 && this.state.date !== 0) ? (<Button type='primary' onClick={e=>{this.setState({grafic: 'block', main: 'none'}); e.preventDefault()}}>Расчитать</Button>) : (<Button disabled>Расчитать</Button>) }
           </div>
         </form>
-        <p>{this.state.inputs}</p>
-        <p>{this.state.cdp}</p>
       </section>
     )
   }
