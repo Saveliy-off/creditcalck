@@ -144,7 +144,6 @@ export default class App extends Component {
       } else if (cdpmonth[idl] === mes && cdpyear[idl] === year) {
         var start = new Date(date);
         var end = new Date(cdpyear[idl] + '-' + cdpmonth[idl] + '-' + date.getDate());
-
         var yearDiff = end.getFullYear() - start.getFullYear();
         var monthDiff = end.getMonth() - start.getMonth();
 
@@ -170,6 +169,13 @@ export default class App extends Component {
         mes = 1
         year++
       }else{
+        if (mes < 10) {
+          mes = '0' + mes
+        }
+        let daysdate = date.getDate()
+        if (daysdate < 10) {
+          daysdate = '0' + daysdate
+        }
         mes++
       }
       let justdate = new Date(year+'-'+mes+'-'+date.getDate()).toLocaleDateString() 
